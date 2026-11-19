@@ -1,3 +1,103 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Dark navy: used for the hero, contact and footer only */
+  --color-navy: #0b1530;
+  --color-navy-2: #121d40;
+
+  /* Light theme */
+  --color-ink: #0f1b3d; /* main text colour (dark navy) */
+  --color-muted: #56627f; /* secondary text */
+  --color-surface: #f5f7fc; /* very light grey section background */
+  --color-line: #e2e8f3; /* borders */
+
+  /* Accents */
+  --color-brand: #1f66f2; /* blue */
+  --color-violet: #7a5af8; /* purple */
+  --color-sky: #5aa9ff; /* light blue, for use on navy */
+
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 40s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(47, 95, 240, 0.22);
+}
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Gradient text for use on navy backgrounds */
+.text-gradient {
+  background-image: linear-gradient(90deg, #2f5ff0, #7058f5, #2f5ff0);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Subtle grid for navy sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient,
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-ping {
+    animation: none !important;
+  }
+}
